@@ -8,7 +8,9 @@
                 },
                 "debug": true
             }
-        ],        "react"
+        ],     
+        "stage-3",   
+        "react"
     ],
     "plugins":[
         "transform-class-properties",

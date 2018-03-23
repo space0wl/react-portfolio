@@ -7,8 +7,8 @@ import Vortex from "../../components/Vortex";
 const app = () => {
     return (
         <div>
-            <Vortex CanvasDiameter={400} MaxParticleCount={40} ParticleSize={5} ParticleColor="blue" />
-            <Vortex CanvasDiameter={400} MaxParticleCount={20} ParticleSize={3} ParticleColor="blue" />
+            <Vortex CanvasDiameter={200} MaxParticleCount={40} ParticleSize={3} ParticleColor="blue" />
+            <Vortex CanvasDiameter={400} MaxParticleCount={20} ParticleSize={5} ParticleColor="blue" />
             <Vortex CanvasDiameter={400} MaxParticleCount={10} ParticleSize={7} ParticleColor="blue" />
         </div>
     );
