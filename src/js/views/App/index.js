@@ -17,7 +17,7 @@ const app = () => {
                 <img src="https://media.giphy.com/media/zhJR6HbK4fthC/giphy.gif" />
                 </div>
             </Vortex>
-            <Vortex CanvasDiameter={400} CanvasColor="rgba(0,0,0,0.1)" MaxParticleCount={50} ParticleSize={2}>
+            <Vortex CanvasDiameter={400} CanvasColor="rgba(0,0,0,0.1)" MaxParticleCount={100} ParticleSize={2} NoTrails={true}>
                 <div className="centerContent" style={{ backgroundColor: "grey", borderRadius: 380, width: 380, height: 380, position: "relative", top: 390, left: 10, overflow:"hidden" }}>
                 <img src="https://media.giphy.com/media/zhJR6HbK4fthC/giphy.gif" />
                 </div>

@@ -30,6 +30,9 @@ class Vortex extends React.Component {
 
     updateParticles = () => {
         requestAnimationFrame(this.updateParticles);
+        if (this.props.NoTrails === true) {
+            this.canvasContext.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        }
         this.canvasContext.fillStyle = this.props.CanvasColor;
         this.canvasContext.fillRect(0, 0, this.canvas.width, this.canvas.height);
         this.particles.forEach(p => {
@@ -50,7 +53,7 @@ class Vortex extends React.Component {
 
     render() {
         return (
-            <div style={{padding: 100}}>
+            <div style={{ padding: 100 }}>
                 {this.props.children}
                 <canvas ref="canvas" id={`vortex-canvas-${this.props.key}`} style={{ borderRadius: this.props.CanvasDiameter }}>
                 </canvas>
