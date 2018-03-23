@@ -8,10 +8,10 @@
                 },
                 "debug": true
             }
-        ],
-        "babel-preset-react"
+        ],        "react"
     ],
     "plugins":[
+        "transform-class-properties",
         "transform-runtime",
         "react-hot-loader/babel"
     ]
