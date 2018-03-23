@@ -4,49 +4,58 @@ import { hot } from "react-hot-loader";
 import Particle from "./Particle";
 
 class Vortex extends React.Component {
-    constructor(props){
+    constructor(props) {
         super(props);
 
-        this.Particles = [];
-        this.ParticleSize = this.props.ParticleSize;
-        this.ParticleColor = this.props.ParticleColor;
-        this.CanvasDiameter = this.props.CanvasDiameter;
+        this.particles = [];
+        this.particleColors = this.props.ParticleColors || ['#1C5475', '#4684A8', '#26485B', '#648FA8', '#66C0F4'];
+        this.particleSize = this.props.ParticleSize;
+        this.particleColor = this.props.ParticleColor;
+        this.canvasDiameter = this.props.CanvasDiameter;
     }
 
     createParticles = count => {
         for (let i = 0; i < count; i++) {
-            this.Particles.push(new Particle(
-                this.Canvas.width / 2, 
-                this.Canvas.height / 2, 
-                (Math.random() * this.ParticleSize) * 1, 
-                this.ParticleColor, 
-                this.CanvasContext
-            ));         
+            this.particles.push(new Particle(
+                this.canvas.width / 2,
+                this.canvas.height / 2,
+                (Math.random() * this.particleSize) * 1,
+                0.01,
+                0.03,
+                this.particleColors[Math.floor(Math.random() * this.particleColors.length)],
+                this.canvasContext
+            ));
         }
     }
 
     updateParticles = () => {
         requestAnimationFrame(this.updateParticles);
-        this.CanvasContext.fillStyle = "rgba(255,255,255,0.2";
-        this.CanvasContext.fillRect(0, 0, this.Canvas.width, this.Canvas.height);
-        this.Particles.forEach(p => {
+        this.canvasContext.fillStyle = this.props.CanvasColor;
+        this.canvasContext.fillRect(0, 0, this.canvas.width, this.canvas.height);
+        this.particles.forEach(p => {
             p.update();
         });
     }
 
     componentDidMount() {
-        this.Canvas = this.refs.canvas;
-        this.CanvasContext = this.Canvas.getContext("2d");
+        this.canvas = this.refs.canvas;
+        this.canvasContext = this.canvas.getContext("2d");
 
-        this.Canvas.width = this.CanvasDiameter;
-        this.Canvas.height = this.CanvasDiameter;
+        this.canvas.width = this.canvasDiameter;
+        this.canvas.height = this.canvasDiameter;
 
         this.createParticles(this.props.MaxParticleCount || 1);
         this.updateParticles();
     }
 
     render() {
-        return (<canvas ref="canvas" id={`vortex-canvas-${this.props.key}`} style={{borderRadius: this.props.CanvasDiameter}}></canvas>);
+        return (
+            <div style={{padding: 100}}>
+                {this.props.children}
+                <canvas ref="canvas" id={`vortex-canvas-${this.props.key}`} style={{ borderRadius: this.props.CanvasDiameter }}>
+                </canvas>
+            </div>
+        );
     }
 }
 

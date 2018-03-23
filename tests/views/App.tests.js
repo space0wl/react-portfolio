@@ -18,6 +18,6 @@ describe("<App />", () => {
         const children = wrapper.children();
 
         //Assert
-        expect(children).to.have.length(1);
+        expect(children).to.have.length(3);
     });
 });
