@@ -1,0 +1,22 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    background-color: #26485B;
+    font-family: "rift", sans-serif;;
+    color: #fff;
+}
+.rift-demi {
+    font-size: 4rem;
+    font-weight: 400;
+}
+.landing-zone-backdrop {
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+}

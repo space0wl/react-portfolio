@@ -56,7 +56,7 @@ class ParticleBackdrop extends React.Component {
 
     render() {
         return (
-            <div style={this.props.Style}>
+            <div className={this.props.CssClass} style={this.props.Style}>
                 {this.props.children}
                 <canvas ref="canvas" id={`pb-canvas-${this.props.key}`}>
                 </canvas>

@@ -8,12 +8,12 @@ import ParticleBackdrop from "../../components/ParticleBackdrop";
 const landing = () => {
     return (
         <div>
-            <ParticleBackdrop Style={{ position: "absolute", top: 0, left: 0, width: "100vw", height: "100%", overflow: "hidden" }} CanvasColor="#26485B" MaxParticleCount={800} MaxParticleSize={3} NoTrails={true} />
+            <ParticleBackdrop CssClass="landing-zone-backdrop" CanvasColor="#26485B" MaxParticleCount={800} MaxParticleSize={3} NoTrails={true} />
             <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
                 <div style={{ zIndex: 1, marginTop: "10%", paddingBottom: "4rem" }}>
                     <img src="https://s3-us-west-2.amazonaws.com/mbcom-assets/images/marcbrannan.com-logo-v1.png" />
                 </div>
-                <div style={{ zIndex: 1, position: "relative", top: "10%", color: "#FFF" }}>
+                <div style={{ zIndex: 1, position: "relative", top: "10%" }}>
                     <span className="rift-demi">Hey stranger! My name is Marc Brannan.</span>
                     <br />
                     <span className="rift-demi">I like to code with C#.</span>
