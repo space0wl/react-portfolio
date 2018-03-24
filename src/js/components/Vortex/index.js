@@ -8,7 +8,7 @@ class Vortex extends React.Component {
         super(props);
 
         this.particles = [];
-        this.particleColors = this.props.ParticleColors || ['#1C5475', '#4684A8', '#26485B', '#648FA8', '#66C0F4'];
+        this.particleColors = this.props.ParticleColors || ["#1C5475", "#4684A8", "#26485B", "#648FA8", "#66C0F4"];
         this.particleSize = this.props.ParticleSize;
         this.particleColor = this.props.ParticleColor;
         this.canvasDiameter = this.props.CanvasDiameter;
