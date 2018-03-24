@@ -1,8 +1,9 @@
-import React from "react";
+import React from "react"; // eslint-disable-line no-unused-vars
 import Chai, { expect } from "chai";
 import Enzyme, { shallow } from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
-import chaiEnzyme from "chai-enzyme"
+import chaiEnzyme from "chai-enzyme";
+import {describe, it} from "mocha";
 
 Enzyme.configure({ adapter: new Adapter() });
 Chai.use(chaiEnzyme());

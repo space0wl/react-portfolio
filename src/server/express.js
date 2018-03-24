@@ -1,6 +1,4 @@
 import express from "express";
-import path from "path";
-
 const server = express();
 
 const webpack = require("webpack");
@@ -12,7 +10,7 @@ webpack-mild-compile is used to combat issue #25 where webpack compiles watched 
 */
 // require("webpack-mild-compile")(webpackCompiler); 
 
- // Webpack middleware will build application as normal to the dist folder.
+// Webpack middleware will build application as normal to the dist folder.
 const webpackDevMiddleware = require("webpack-dev-middleware")(webpackCompiler, webpackConfig.devServer);
 
 /*
@@ -32,5 +30,5 @@ server.use(staticMiddleware);
 // Finally start the server and listen on the specified port.
 const PORT = 8080;
 server.listen(PORT, () => {
-    console.log(`Server is listening on port ${PORT}`);
+    console.log(`Server is listening on port ${PORT}`); // eslint-disable-line
 });

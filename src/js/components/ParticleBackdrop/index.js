@@ -7,7 +7,7 @@ class ParticleBackdrop extends React.Component {
     constructor(props) {
         super(props);
 
-        this.particleColors = this.props.ParticleColors || ["#1C5475", "#4684A8", "#26485B", "#648FA8", "#66C0F4"];
+        this.particleColors = this.props.ParticleColors || ["#1C5475", "#4684A8", "#648FA8", "#66C0F4"];
         this.particleSize = this.props.MaxParticleSize;
 
         this.state = {
@@ -15,28 +15,18 @@ class ParticleBackdrop extends React.Component {
             CanvasWidth: window.innerWidth
         };
     }
-    handleResize = () => {
-        this.setState({
-            CanvasHeight: window.innerHeight,
-            CanvasWidth: window.innerWidth
-        });
-        this.canvas.width = this.state.CanvasWidth;
-        this.canvas.height = this.state.CanvasHeight;
-        this.createParticles(this.props.MaxParticleCount || 1);
-        this.updateParticles();
-    }
+
+    randomInRange = (min, max) => (Math.random() * (min - max) + max);
 
     createParticles = count => {
         this.particles = [];
         for (let i = 0; i < count; i++) {
             this.particles.push(new Particle(
-                this.canvas.width / 2,
-                this.canvas.height / 2,
                 (Math.random() * this.particleSize) * 1,
-                0.0001,
-                0.001,
+                1,
                 this.particleColors[Math.floor(Math.random() * this.particleColors.length)],
-                this.canvasContext
+                this.canvasContext,
+                this.randomInRange(0.001, 0.01)
             ));
         }
     }
@@ -54,8 +44,6 @@ class ParticleBackdrop extends React.Component {
     }
 
     componentDidMount() {
-        window.addEventListener("resize", this.handleResize);
-
         this.canvas = this.refs.canvas;
         this.canvasContext = this.canvas.getContext("2d");
 
@@ -66,9 +54,6 @@ class ParticleBackdrop extends React.Component {
         this.updateParticles();
     }
 
-    componentWillUnmount() {
-        window.removeEventListener("resize", this.handleResize);
-    }
     render() {
         return (
             <div>

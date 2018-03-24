@@ -8,7 +8,7 @@ import ParticleBackdrop from "../../components/ParticleBackdrop";
 const app = () => {
     return (
         <div className="center">
-            <ParticleBackdrop CanvasColor="#26485B" MaxParticleCount={400} MaxParticleSize={5} NoTrails={true} />
+            <ParticleBackdrop CanvasColor="#26485B" MaxParticleCount={800} MaxParticleSize={3} NoTrails={true} />
         </div>
     );
 };

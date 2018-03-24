@@ -1,42 +1,58 @@
 class Particle {
-    constructor (x, y, radius, minVelocity, maxVelocity, color, canvas) {
-        this.origin = {x: x, y: y};
-        this.currentPoint = {...this.origin};
-        this.lastPoint = {...this.origin};
+    constructor(radius, maxVelocity, color, canvas, alphaRate = 0.01) {
         this.radius = radius;
         this.color = color;
         this.canvasContext = canvas;
-        this.distanceFromCenter = this.calculateDistanceFromCenter(0, (this.canvasContext.canvas.width - this.radius) / 2);
-        this.radians = this.startingRadianFromDegrees(Math.random() * 360);
-        this.velocity = Math.random() * (maxVelocity - minVelocity) + minVelocity;
+        this.origin = { x: this.canvasContext.canvas.width * Math.random(), y: this.canvasContext.canvas.height * Math.random() };
+        this.currentPoint = { ...this.origin };
+        this.velocity = { x: this.buildVelocity(maxVelocity), y: this.buildVelocity(maxVelocity) };
+        this.currentAlpha = 1;
+        this.alphaRate = alphaRate;
+        this.fading = true;
     }
 
-    startingRadianFromDegrees = degrees => (degrees / 180) * Math.PI;
-    calculateDistanceFromCenter = (min, max) => Math.floor(Math.random() * (max - min + 1) + min);
-    
+    buildVelocity = (max) => {
+        return max * Math.random() - max / 2;
+    }
+
     update = () => {
-        this.lastPoint.x = this.currentPoint.x;
-        this.lastPoint.y = this.currentPoint.y;
-        this.radians += this.velocity;
-        this.currentPoint.x = this.origin.x + Math.cos(this.radians) * this.distanceFromCenter;
-        this.currentPoint.y = this.origin.y + Math.sin(this.radians) * this.distanceFromCenter;
+        this.currentPoint.x += this.velocity.x;
+        this.currentPoint.y += this.velocity.y;
+
+        if (this.currentPoint.x < 0 || this.currentPoint.x > this.canvasContext.canvas.width + this.radius * 2) {
+            this.velocity.x = -this.velocity.x;
+        }
+        if (this.currentPoint.y < 0 || this.currentPoint.y > this.canvasContext.canvas.height + this.radius * 2) {
+            this.velocity.y = -this.velocity.y;
+        }
+        
+        if(this.currentAlpha <= 1 && this.fading === true){
+            this.currentAlpha -= this.alphaRate;
+            if(this.currentAlpha <= 0){
+                this.currentAlpha = 0;
+                this.fading = false;
+            }
+        } else {
+            this.currentAlpha += this.alphaRate;
+            if(this.currentAlpha >= 1){
+                this.currentAlpha = 1;
+                this.fading = true;
+            }
+        }
+
         this.draw();
     };
-    
-    draw = () => {
-        this.canvasContext.beginPath();
-        this.canvasContext.arc(this.lastPoint.x, this.lastPoint.y, this.radius, 0, Math.PI * 2, false);
-        this.canvasContext.fillStyle = this.color;
-        this.canvasContext.fill();
-        this.canvasContext.closePath();
 
-        // this.canvasContext.beginPath();
-        // this.canvasContext.strokeStyle = this.color;
-        // this.canvasContext.lineWidth = this.radius;
-        // this.canvasContext.moveTo(this.lastPoint.x, this.lastPoint.y);
-        // this.canvasContext.lineTo(this.currentPoint.x, this.currentPoint.y);
-        // this.canvasContext.stroke();
-        // this.canvasContext.closePath();
+    draw = () => {
+        this.canvasContext.fillStyle = this.color;
+        this.canvasContext.globalAlpha = this.currentAlpha;
+
+        //this.canvasContext.fillRect(this.currentPoint.x, this.currentPoint.y, this.radius, this.radius);
+
+        this.canvasContext.beginPath();
+        this.canvasContext.arc(this.currentPoint.x, this.currentPoint.y, this.radius, 0, Math.PI * 2, true);
+        this.canvasContext.closePath();
+        this.canvasContext.fill();
     };
 }
 
