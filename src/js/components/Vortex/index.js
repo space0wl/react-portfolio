@@ -53,7 +53,7 @@ class Vortex extends React.Component {
 
     render() {
         return (
-            <div style={{ padding: 100 }}>
+            <div>
                 {this.props.children}
                 <canvas ref="canvas" id={`vortex-canvas-${this.props.key}`} style={{ borderRadius: this.props.CanvasDiameter }}>
                 </canvas>

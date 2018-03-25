@@ -1,10 +1,22 @@
+@import url(http://weloveiconfonts.com/api/?family=entypo|fontawesome);
+
+/* entypo */
+[class*="entypo-"]:before {
+  font-family: 'entypo', sans-serif;
+}
+
+/* fontawesome */
+[class*="fontawesome-"]:before {
+  font-family: 'FontAwesome', sans-serif;
+}
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 body {
-    background-color: #26485B;
+    background-color: rgba(38, 72, 91, 1);
     font-family: "rift", sans-serif;;
     color: #fff;
 }
@@ -15,7 +27,7 @@ body {
 .mad-lib {
     font-weight: 600;
     text-decoration: underline;
-    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+    //text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
     animation-name: mad-lib-color;
     animation-duration: 3s;
     animation-fill-mode: both;

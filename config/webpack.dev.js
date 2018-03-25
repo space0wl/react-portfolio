@@ -14,6 +14,7 @@ module.exports = {
     },
     devServer: {
         contentBase: "dist",
+        historyApiFallback:true,
         overlay: true,
         hot: true,
         stats: {

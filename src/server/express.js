@@ -20,9 +20,10 @@ This will allow us to behave like the hot reloading in webpack-dev-server.
 const webpackHotMiddleware = require("webpack-hot-middleware")(webpackCompiler, webpackConfig.devServer);
 
 // Create server middleware to serve application from the dist folder.
-const staticMiddleware = express.static("dist"); 
+const staticMiddleware = express.static("dist");
 
 // As usual, the order in which the middleware is run is important. First webpack, then hot-reloader, then express static.
+//server.use(history);
 server.use(webpackDevMiddleware);
 server.use(webpackHotMiddleware);
 server.use(staticMiddleware);
