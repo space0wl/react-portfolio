@@ -10,21 +10,28 @@ class MadLib extends React.Component {
         this.libs = this.props.Libs;
 
         this.state = {
-            currentLib: this.getLib()
+            currentLib: this.getLib(),
+            lastNounMap: new Map()
         };
     }
 
     getLib = () => {
-        var lib = this.libs[Math.floor(Math.random() * this.libs.length)];
-        var noun = this.state ? this.state.currentLib.noun : null;
-        while(!noun || (this.state && noun === this.state.currentLib.noun)){
+        var lib = null;
+        while(!lib || (this.state && lib.action === this.state.currentLib.action)){
+            lib = this.libs[Math.floor(Math.random() * this.libs.length)];
+        }
+        var noun = this.state ? this.state.lastNounMap.get(lib.action) : null;
+        while(!noun || (this.state && noun === this.state.lastNounMap.get(lib.action))){
             noun = lib.nouns[Math.floor(Math.random() * lib.nouns.length)];
         }
         var newLib = { action: lib.action, noun: noun };
         return newLib;
     }
     updateLib = () => {
-        this.setState({currentLib: this.getLib()});
+        const nextLib = this.getLib();
+        const lastNounMap = this.state.lastNounMap;
+        lastNounMap.set(nextLib.action, nextLib.noun);
+        this.setState({currentLib: nextLib, lastNounMap: lastNounMap});
     }
     componentWillUnmount() {
         clearInterval(this.interval);
