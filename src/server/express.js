@@ -4,6 +4,7 @@ const server = express();
 const webpack = require("webpack");
 const webpackConfig = require("../../config/webpack.dev.js");
 const webpackCompiler = webpack(webpackConfig);
+const history = require("connect-history-api-fallback");
 
 /*
 webpack-mild-compile is used to combat issue #25 where webpack compiles watched files multiple times. see: https://github.com/webpack/watchpack/issues/25
@@ -23,7 +24,7 @@ const webpackHotMiddleware = require("webpack-hot-middleware")(webpackCompiler, 
 const staticMiddleware = express.static("dist");
 
 // As usual, the order in which the middleware is run is important. First webpack, then hot-reloader, then express static.
-//server.use(history);
+server.use(history());
 server.use(webpackDevMiddleware);
 server.use(webpackHotMiddleware);
 server.use(staticMiddleware);
